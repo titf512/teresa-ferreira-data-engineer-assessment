@@ -7,13 +7,18 @@ requires-python = ">=3.9"
 authors = [
     {name = "Teresa Ferreira"}
 ]
-dependencies = []
+
+dependencies = [
+    "requests>=2.31.0",
+    "lxml>=5.1.0",
+]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.3.0",
     "mypy>=1.9.0",
+    "types-requests",
 ]
 
 [tool.setuptools.packages.find]
@@ -31,4 +36,8 @@ convention = "google"
 
 [tool.mypy]
 python_version = "3.9"
+mypy_path = "src"
+explicit_package_bases = true
+namespace_packages = true
 ignore_missing_imports = true
+exclude = ["venv", ".venv", "data", "build", "src/"]
