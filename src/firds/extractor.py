@@ -1,6 +1,8 @@
-import os
-import requests
+"""Module responsible for downloading files from ESMA."""
 import logging
+import os
+
+import requests
 
 logger = logging.getLogger(__name__)
 
