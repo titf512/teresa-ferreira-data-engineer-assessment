@@ -47,7 +47,7 @@ Ensures code follows professional style guides and includes mandatory documentat
 ### Mypy:
 Verifies that type hints are consistent throughout the pipeline:
    ```bash
-   python3 -m ruff mypy .  
+   python3 -m mypy .  
    ```
 
 ### Running Tests
