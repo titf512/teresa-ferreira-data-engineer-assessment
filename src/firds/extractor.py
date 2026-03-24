@@ -1,6 +1,7 @@
 """Module responsible for downloading files from ESMA."""
 import logging
 import os
+import zipfile
 
 import requests
 
@@ -23,4 +24,13 @@ class Extractor:
                     f.write(chunk)
 
         logger.info(f"File successfully saved to: {target_path}")
+
+
+
+    def extract_zip(self, zip_path: str, extract_to: str):
+        """Unzips the file and returns the path to the extracted XML."""
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_to)
+            xml_filename = zip_ref.namelist()[0]
+            return os.path.join(extract_to, xml_filename)
 
