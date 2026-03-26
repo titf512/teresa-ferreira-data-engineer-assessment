@@ -2,21 +2,26 @@
 
 import logging
 
-from src.firds.extractor import Extractor
-from src.firds.parser import Parser
-from src.firds.transformer import Transformer
-from src.firds.uploader import Uploader
+from firds.extractor import Extractor
+from firds.parser import Parser
+from firds.transformer import Transformer
+from firds.uploader import Uploader
 
 logging.basicConfig(
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
+# CONSTANTS
+URL = "https://registers.esma.europa.eu/solr/esma_registers_firds_files/select?q=*&fq=publication_date:%5B2021-01-17T00:00:00Z+TO+2021-01-19T23:59:59Z%5D&wt=xml&indent=true&start=0&rows=100"
+DATA_DIR = "data/raw.xml"
+ZIP_PATH = "data/firds_data.zip"
+OUTPUT_CSV = "data/firds_instruments.csv"
+MOCK_CLOUD_PATH = "file://data/mock_s3_bucket/firds_export.csv"
+
+
 def run_pipeline():
     """Execute the complete process."""
-    URL = "https://registers.esma.europa.eu/solr/esma_registers_firds_files/select?q=*&fq=publication_date:%5B2021-01-17T00:00:00Z+TO+2021-01-19T23:59:59Z%5D&wt=xml&indent=true&start=0&rows=100"
-    DATA_DIR = "data/raw.xml"
-
     # 1. Download the xml
     logger.info("--- Starting XML Extraction ---\n")
     extractor = Extractor()
@@ -26,24 +31,21 @@ def run_pipeline():
     logger.info("--- Starting to fetch the second download "
                 "link whose file_type is DLTINS ---\n")
     parser = Parser()
-    xml_name = DATA_DIR
-    dltins_url = parser.get_target_link(xml_name)
+    dltins_url = parser.get_target_link(DATA_DIR)
 
     # 3. Extract the xml from the zip
     logger.info("--- Starting ZIP Extraction ---\n")
-    zip_path = "data/firds_data.zip"
-    extractor.download(dltins_url, zip_path)
-    xml_path = extractor.extract_zip(zip_path, "data/")
+    extractor.download(dltins_url, ZIP_PATH)
+    xml_path = extractor.extract_zip(ZIP_PATH, "data/")
     logger.info(f"--- File unzipped: {xml_path} ---\n")
 
     # 4: Convert XML to CSV
     logger.info("--- Converting XML to CSV ---\n")
-    output_csv = "data/firds_instruments.csv"
-    parser.xml_to_csv(xml_path, output_csv)
-    logger.info(f"--- CSV generated: {output_csv} ---\n")
+    parser.xml_to_csv(xml_path, OUTPUT_CSV)
+    logger.info(f"--- CSV generated: {OUTPUT_CSV} ---\n")
 
     # csv transformer
-    transformer = Transformer(output_csv)
+    transformer = Transformer(OUTPUT_CSV)
 
     # 5: Add column a_count to csv
     # This column contains the number of times the lower-case character “a”
@@ -60,7 +62,6 @@ def run_pipeline():
     # Code below how I would handle AWS S3 and Microsoft Azure
     # Since I don't have real AWS or Azure credentials, I'm going to use Local Mocking
     # for demonstration by using the file:// protocol with fsspec
-
     '''
     # --- For AWS S3---
     # I didn't put storage_options for AWS S3 because 
@@ -81,10 +82,10 @@ def run_pipeline():
     azure_uploader.upload(output_csv, azure_url)
     '''
 
-    mock_cloud_path = "file://data/mock_s3_bucket/firds_export.csv"
-
     uploader = Uploader()
-    uploader.upload(output_csv, mock_cloud_path)
+    uploader.upload(OUTPUT_CSV, MOCK_CLOUD_PATH)
+
+    logger.info("--- SUCCESS: End of pipeline ---\n")
 
 
 if __name__ == "__main__":

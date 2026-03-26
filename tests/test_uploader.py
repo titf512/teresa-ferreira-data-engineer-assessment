@@ -1,7 +1,7 @@
 """Test the uploader module."""
 import fsspec
 
-from src.firds.uploader import Uploader
+from firds.uploader import Uploader
 
 
 def test_upload_file_to_memory(tmp_path):

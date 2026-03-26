@@ -4,7 +4,7 @@ import shutil
 
 import pandas as pd
 
-from src.firds.transformer import Transformer
+from firds.transformer import Transformer
 
 
 def test_add_a_count_logic(tmp_path):

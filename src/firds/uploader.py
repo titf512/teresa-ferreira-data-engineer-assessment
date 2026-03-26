@@ -1,5 +1,6 @@
 """Module responsible for storing the csv file."""
 import logging
+from typing import Any, Dict, Optional
 
 import fsspec
 
@@ -8,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class Uploader:
     """A cloud-agnostic uploader using fsspec."""
-    def __init__(self, storage_options: dict = None):
+    def __init__(self, storage_options: Optional[Dict[str, Any]] = None):
         """Initializes the Uploader with the different credentials.
 
         e.g., {"key": "...", "secret": "..."} for S3
@@ -24,9 +25,9 @@ class Uploader:
                 with fsspec.open(remote_url, 'wb', **self.storage_options) as target:
                     target.write(source.read())
 
-            logger.info("--- Upload of csv was successful ---")
+            logger.info("--- Upload of csv was successful ---\n")
             return True
 
         except Exception as e:
-            logger.error(f"--- Upload Failed: {str(e)} ---")
+            logger.error(f"--- Upload Failed: {str(e)} ---\n")
             return False
