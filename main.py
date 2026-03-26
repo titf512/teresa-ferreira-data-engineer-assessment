@@ -40,6 +40,11 @@ def run_pipeline():
     parser.xml_to_csv(xml_path, output_csv)
     logger.info(f"--- CSV generated: {output_csv} ---\n")
 
+    # 5: Add column a_count to csv
+    # This column contains the number of times the lower-case character “a” is present in the column `FinInstrmGnlAttrbts.FullNm`
+    logger.info("--- Adding a_count column to CSV ---\n")
+    parser.add_a_count_column(output_csv)
+
 
 if __name__ == "__main__":
     run_pipeline()

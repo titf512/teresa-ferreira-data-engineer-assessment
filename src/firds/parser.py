@@ -2,6 +2,7 @@
 import csv
 import logging
 
+import pandas as pd
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -55,3 +56,15 @@ class Parser:
                 elem.clear()
                 while elem.getprevious() is not None:
                     del elem.getparent()[0]
+
+
+    def add_a_count_column(self, csv_path: str):
+        """Add the 'a_count' column to the csv file.
+        Using Pandas for simplicity and standard data manipulation.
+        """
+        df = pd.read_csv(csv_path)
+
+        column_name = "FinInstrmGnlAttrbts.FullNm"
+        df['a_count'] = df[column_name].astype(str).str.count('a')
+
+        df.to_csv(csv_path, index=False)
