@@ -1,19 +1,18 @@
 """Module responsible for storing the csv file."""
-import fsspec
 import logging
+
+import fsspec
 
 logger = logging.getLogger(__name__)
 
 
 class Uploader:
-    """
-    A cloud-agnostic uploader using fsspec.
-    """
-
+    """A cloud-agnostic uploader using fsspec."""
     def __init__(self, storage_options: dict = None):
-        """Initializes the Uploader with the different credentials for the cloud provider.
-            e.g., {"key": "...", "secret": "..."} for S3
-            or {"account_name": "...", "account_key": "..."} for Azure.
+        """Initializes the Uploader with the different credentials.
+
+        e.g., {"key": "...", "secret": "..."} for S3
+        or {"account_name": "...", "account_key": "..."} for Azure.
         """
         self.storage_options = storage_options or {}
 
