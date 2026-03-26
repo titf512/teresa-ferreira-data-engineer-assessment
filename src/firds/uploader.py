@@ -24,9 +24,9 @@ class Uploader:
                 with fsspec.open(remote_url, 'wb', **self.storage_options) as target:
                     target.write(source.read())
 
-            logger.info("--- Upload of csv was successful ---")
+            logger.info("--- Upload of csv was successful ---\n")
             return True
 
         except Exception as e:
-            logger.error(f"--- Upload Failed: {str(e)} ---")
+            logger.error(f"--- Upload Failed: {str(e)} ---\n")
             return False
