@@ -34,6 +34,11 @@ def run_pipeline():
     xml_path = extractor.extract_zip(zip_path, "data/")
     logger.info(f"--- File unzipped: {xml_path} ---\n")
 
+    # 4: Convert XML to CSV
+    logger.info("--- Converting XML to CSV ---\n")
+    output_csv = "data/firds_instruments.csv"
+    parser.xml_to_csv(xml_path, output_csv)
+    logger.info(f"--- CSV generated: {output_csv} ---\n")
 
 
 if __name__ == "__main__":

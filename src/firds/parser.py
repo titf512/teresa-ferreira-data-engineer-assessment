@@ -1,4 +1,5 @@
 """Module responsible for parsing files."""
+import csv
 import logging
 
 from lxml import etree
@@ -20,3 +21,34 @@ class Parser:
         result = tree.xpath(xpath)
 
         return result[0] if result else ""
+
+    def xml_to_csv(self, xml_path: str, output_path: str):
+        """Parse the xml to csv file."""
+        headers = [
+            "FinInstrmGnlAttrbts.Id", "FinInstrmGnlAttrbts.FullNm",
+            "FinInstrmGnlAttrbts.ClssfctnTp", "FinInstrmGnlAttrbts.CmmdtyDerivInd",
+            "FinInstrmGnlAttrbts.NtnlCcy", "Issr"
+        ]
+
+        with open(output_path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(headers)
+
+            context = etree.iterparse(xml_path, events=('end',),
+                                      tag='{*}FinInstrmGnlAttrbts')
+            for _, elem in context:
+                row = [
+                    elem.findtext('{*}Id'),
+                    elem.findtext('{*}FullNm'),
+                    elem.findtext('{*}ClssfctnTp'),
+                    elem.findtext('{*}CmmdtyDerivInd'),
+                    elem.findtext('{*}NtnlCcy'),
+                ]
+                issr_list = elem.xpath('..//*[local-name()="Issr"]/text()')
+                row.append(issr_list[0] if issr_list else "")
+
+                writer.writerow(row)
+
+                elem.clear()
+                while elem.getprevious() is not None:
+                    del elem.getparent()[0]
