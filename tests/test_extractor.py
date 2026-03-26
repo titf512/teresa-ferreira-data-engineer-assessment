@@ -2,7 +2,7 @@
 
 from unittest.mock import MagicMock, patch
 
-from src.firds.extractor import Extractor
+from firds.extractor import Extractor
 
 
 def test_extractor_mock(tmp_path):
