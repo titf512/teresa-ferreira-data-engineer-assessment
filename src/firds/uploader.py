@@ -1,8 +1,8 @@
 """Module responsible for storing the csv file."""
 import logging
+from typing import Any, Dict, Optional
 
 import fsspec
-from typing import Optional, Dict, Any
 
 logger = logging.getLogger(__name__)
 
