@@ -12,6 +12,10 @@ dependencies = [
     "requests>=2.31.0",
     "lxml>=5.1.0",
     "pandas",
+    "fsspec>=2024.2.0",
+    "s3fs>=2024.2.0",   # Required for s3://
+    "adlfs>=2024.2.0",  # Required for az:// or abfs://
+    "pandas>=2.0.0",
 ]
 
 [project.optional-dependencies]

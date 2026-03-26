@@ -5,6 +5,7 @@ import logging
 from src.firds.extractor import Extractor
 from src.firds.parser import Parser
 from src.firds.transformer import Transformer
+from src.firds.uploader import Uploader
 
 logging.basicConfig(
     level=logging.INFO
@@ -54,6 +55,34 @@ def run_pipeline():
     # value “YES” if `a_count` is greater than 0, “NO” otherwise.
     logger.info("--- Adding contains_a column to CSV ---\n")
     transformer.add_contains_a_column()
+
+    # 7+8: Store the csv
+    # Code below how I would handle AWS S3 and Microsoft Azure
+    # Since I don't have real AWS or Azure credentials, I'm going to use Local Mocking
+    # for demonstration by using the file:// protocol with fsspec
+
+    '''
+    # --- For AWS S3---
+    # I didn't put storage_options for AWS S3 because fsspec Looks for ~/.aws/credentials
+    # In a real production environment I would just have to make sure that I had that file
+    aws_uploader = Uploader()
+    aws_s3_url = "PLACEHOLDER_FOR_URL"
+    aws_uploader.upload(output_csv, aws_s3_url)
+
+    # --- For Microsoft Azure ---
+    azure_options = {
+        "account_name": "my_azure_account",
+        "account_key": "my_secret_key"
+    }
+    azure_uploader = Uploader(azure_options)
+    azure_url = "PLACEHOLDER_FOR_URL"
+    azure_uploader.upload(output_csv, azure_url)
+    '''
+
+    mock_cloud_path = "file://data/mock_s3_bucket/firds_export.csv"
+
+    uploader = Uploader()
+    uploader.upload(output_csv, mock_cloud_path)
 
 
 if __name__ == "__main__":
