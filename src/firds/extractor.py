@@ -23,7 +23,7 @@ class Extractor:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
 
-        logger.info(f"File successfully saved to: {target_path}")
+        logger.info(f"File successfully saved to: {target_path}\n")
 
 
 

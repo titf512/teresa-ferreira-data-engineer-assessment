@@ -50,6 +50,11 @@ def run_pipeline():
     logger.info("--- Adding a_count column to CSV ---\n")
     transformer.add_a_count_column()
 
+    # 6: Add column contains_a to csv
+    # value “YES” if `a_count` is greater than 0, “NO” otherwise.
+    logger.info("--- Adding contains_a column to CSV ---\n")
+    transformer.add_contains_a_column()
+
 
 if __name__ == "__main__":
     run_pipeline()
