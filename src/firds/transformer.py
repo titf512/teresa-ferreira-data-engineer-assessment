@@ -22,5 +22,6 @@ class Transformer:
     def add_contains_a_column(self):
         """Adds the 'acontains_a' column to the csv file."""
         # Logic: "YES" if a_count > 0, "NO" otherwise.
-        self.df['contains_a'] = self.df['a_count'].apply(lambda x: "YES" if x > 0 else "NO")
+        self.df['contains_a'] = (self.df['a_count']
+                                 .apply(lambda x: "YES" if x > 0 else "NO"))
         self.df.to_csv(self.csv_path, index=False)

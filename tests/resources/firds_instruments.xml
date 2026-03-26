@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BizData xmlns="urn:iso:std:iso:20022:tech:xsd:head.003.001.01">
+    <Pyld>
+        <Document xmlns="urn:iso:std:iso:20022:tech:xsd:auth.101.001.01">
+            <FinInstrmRptgSttstclData>
+                <TermntdRcrd>
+                    <FinInstrmGnlAttrbts>
+                        <Id>DE000ABC123</Id>
+                        <FullNm>Test Instrument One</FullNm>
+                        <ClssfctnTp>FFICSX</ClssfctnTp>
+                        <CmmdtyDerivInd>false</CmmdtyDerivInd>
+                        <NtnlCcy>EUR</NtnlCcy>
+                    </FinInstrmGnlAttrbts>
+                    <Issr>54930084055411910</Issr>
+                </TermntdRcrd>
+                <TermntdRcrd>
+                    <FinInstrmGnlAttrbts>
+                        <Id>FR000XYZ789</Id>
+                        <FullNm>Test Instrument Two</FullNm>
+                        <ClssfctnTp>DBXXXX</ClssfctnTp>
+                        <CmmdtyDerivInd>true</CmmdtyDerivInd>
+                        <NtnlCcy>GBP</NtnlCcy>
+                    </FinInstrmGnlAttrbts>
+                    <Issr>74370077455411921</Issr>
+                </TermntdRcrd>
+            </FinInstrmRptgSttstclData>
+        </Document>
+    </Pyld>
+</BizData>
