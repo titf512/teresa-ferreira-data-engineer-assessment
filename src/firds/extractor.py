@@ -15,7 +15,7 @@ class Extractor:
         """Downloads the file to the specified path."""
         os.makedirs(os.path.dirname(target_path), exist_ok=True)
 
-        logger.info(f"Initiating download from: {url}")
+        logger.info(f"Initiating download from: {url}\n")
 
         with requests.get(url, stream=True) as r:
             r.raise_for_status()

@@ -4,6 +4,7 @@ import logging
 
 from src.firds.extractor import Extractor
 from src.firds.parser import Parser
+from src.firds.transformer import Transformer
 
 logging.basicConfig(
     level=logging.INFO
@@ -40,11 +41,14 @@ def run_pipeline():
     parser.xml_to_csv(xml_path, output_csv)
     logger.info(f"--- CSV generated: {output_csv} ---\n")
 
+    # csv transformer
+    transformer = Transformer(output_csv)
+
     # 5: Add column a_count to csv
     # This column contains the number of times the lower-case character “a”
     # is present in the column `FinInstrmGnlAttrbts.FullNm`
     logger.info("--- Adding a_count column to CSV ---\n")
-    parser.add_a_count_column(output_csv)
+    transformer.add_a_count_column()
 
 
 if __name__ == "__main__":

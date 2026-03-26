@@ -7,6 +7,7 @@ import shutil
 import pandas as pd
 
 from src.firds.parser import Parser
+from src.firds.transformer import Transformer
 
 
 def test_csv_creation(tmp_path):
@@ -59,7 +60,7 @@ def test_add_a_count_logic(tmp_path):
 
     shutil.copy2(csv_file, csv_file_test)
 
-    Parser().add_a_count_column(csv_file)
+    Transformer(csv_file).add_a_count_column()
 
     df = pd.read_csv(csv_file)
 
