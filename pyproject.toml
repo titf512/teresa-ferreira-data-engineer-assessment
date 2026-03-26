@@ -1,0 +1,53 @@
+[project]
+name = "teresa-ferreira-data-engineer-assessment"
+version = "0.1.0"
+description = "ETL pipeline for ESMA FIRDS data processing."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Teresa Ferreira"}
+]
+
+dependencies = [
+    "requests>=2.31.0",
+    "lxml>=5.1.0",
+    "pandas",
+    "fsspec>=2024.2.0",
+    "s3fs>=2024.2.0",   # Required for s3://
+    "adlfs>=2024.2.0",  # Required for az:// or abfs://
+    "pandas>=2.0.0",
+    "pandas-stubs",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.3.0",
+    "mypy>=1.9.0",
+    "types-requests",
+    "types-lxml",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.9"
+mypy_path = "src"
+packages = ["firds", "tests"]
+explicit_package_bases = true
+namespace_packages = true
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_configs = true
+exclude = ["venv", ".venv", "data", "build"]

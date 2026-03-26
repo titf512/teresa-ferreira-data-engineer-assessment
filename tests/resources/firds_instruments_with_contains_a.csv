@@ -1,0 +1,5 @@
+FinInstrmGnlAttrbts.Id,FinInstrmGnlAttrbts.FullNm,FinInstrmGnlAttrbts.ClssfctnTp,FinInstrmGnlAttrbts.CmmdtyDerivInd,FinInstrmGnlAttrbts.NtnlCcy,Issr,a_count,contains_a
+AT0000A2B3D9,EGB OE TL.Z./SARTORIUS V,RWSNCA,False,EUR,PQOH26KWDF7CG10L6792,0,NO
+AT0000A2BJ35,Raiffeisen Centrobank AG TurboL O.End SAP,RFSTCB,False,EUR,529900M2F7D5795H1A49,2,YES
+AT0000A2BJ35,Turbo Long Open End Zertifikat auf SAP SE,RFSTCB,False,EUR,529900M2F7D5795H1A49,2,YES
+AT0000A2BJ35,RCB OE TL.Z./SAP,RFSTCB,False,EUR,529900M2F7D5795H1A49,0,NO
