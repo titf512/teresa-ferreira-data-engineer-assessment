@@ -59,9 +59,8 @@ class Parser:
 
 
     def add_a_count_column(self, csv_path: str):
-        """Add the 'a_count' column to the csv file.
-        Using Pandas for simplicity and standard data manipulation.
-        """
+        """Add the 'a_count' column to the csv file."""
+        #Using Pandas for simplicity and standard data manipulation.
         df = pd.read_csv(csv_path)
 
         column_name = "FinInstrmGnlAttrbts.FullNm"

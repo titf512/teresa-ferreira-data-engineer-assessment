@@ -41,7 +41,8 @@ def run_pipeline():
     logger.info(f"--- CSV generated: {output_csv} ---\n")
 
     # 5: Add column a_count to csv
-    # This column contains the number of times the lower-case character “a” is present in the column `FinInstrmGnlAttrbts.FullNm`
+    # This column contains the number of times the lower-case character “a”
+    # is present in the column `FinInstrmGnlAttrbts.FullNm`
     logger.info("--- Adding a_count column to CSV ---\n")
     parser.add_a_count_column(output_csv)
 
