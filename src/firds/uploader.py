@@ -2,13 +2,14 @@
 import logging
 
 import fsspec
+from typing import Optional, Dict, Any
 
 logger = logging.getLogger(__name__)
 
 
 class Uploader:
     """A cloud-agnostic uploader using fsspec."""
-    def __init__(self, storage_options: dict = None):
+    def __init__(self, storage_options: Optional[Dict[str, Any]] = None):
         """Initializes the Uploader with the different credentials.
 
         e.g., {"key": "...", "secret": "..."} for S3

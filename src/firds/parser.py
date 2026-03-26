@@ -53,6 +53,9 @@ class Parser:
                 writer.writerow(row)
 
                 elem.clear()
-                while elem.getprevious() is not None:
-                    del elem.getparent()[0]
+                parent = elem.getparent()
+                if parent is not None:
+                    while elem.getprevious() is not None:
+                        # We now know parent is not None, so this is safe
+                        del parent[0]
 

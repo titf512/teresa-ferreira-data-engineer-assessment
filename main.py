@@ -2,10 +2,10 @@
 
 import logging
 
-from src.firds.extractor import Extractor
-from src.firds.parser import Parser
-from src.firds.transformer import Transformer
-from src.firds.uploader import Uploader
+from firds.extractor import Extractor
+from firds.parser import Parser
+from firds.transformer import Transformer
+from firds.uploader import Uploader
 
 logging.basicConfig(
     level=logging.INFO

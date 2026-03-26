@@ -1,1 +1,0 @@
-"""FIRDS data extraction and processing package."""

@@ -6,8 +6,8 @@ import shutil
 
 import pandas as pd
 
-from src.firds.parser import Parser
-from src.firds.transformer import Transformer
+from firds.parser import Parser
+from firds.transformer import Transformer
 
 
 def test_csv_creation(tmp_path):

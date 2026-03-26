@@ -42,8 +42,16 @@ convention = "google"
 
 [tool.mypy]
 python_version = "3.9"
+# 1. Force mypy to use 'src' as the base for all imports
 mypy_path = "src"
+# 2. Tell mypy to only look for these specific packages/folders
+# This prevents it from "double-discovering" src.firds
+packages = ["firds", "tests"]
+
 explicit_package_bases = true
 namespace_packages = true
 ignore_missing_imports = true
-exclude = ["venv", ".venv", "data", "build", "src/"]
+check_untyped_defs = true
+# 3. Increase logging if it fails so we can see why
+warn_unused_configs = true
+exclude = ["venv", ".venv", "data", "build"]
