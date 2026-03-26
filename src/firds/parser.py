@@ -12,6 +12,9 @@ class Parser:
 
     def get_target_link(self,xml_path: str):
         """Get the download link from the second DLTINS file."""
+        # I decided to use lxml.etree.iterparse for memory-efficiency reasons
+        # The xml file is quite heavy.
+        # However, I could have used something more simple like pandas read_xml()
         tree = etree.parse(xml_path)
 
         # Selects the 'download_link' text of the SECOND 'doc'
